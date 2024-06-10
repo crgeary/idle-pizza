@@ -156,8 +156,8 @@ export class Game {
 
             this.cashCount -= this.upEmployeePrice;
             this.upEmployeeCount += 1;
-            this.employeeSpeed *= 1.05;
-            this.upEmployeePrice *= 1.1;
+            this.employeeSpeed *= 1.1;
+            this.upEmployeePrice *= 1.025;
         });
 
         this.$upOven.addEventListener('click', () => {
@@ -171,8 +171,8 @@ export class Game {
 
             this.cashCount -= this.upOvenPrice;
             this.upOvenCount += 1;
-            this.ovenSpeed *= 1.05;
-            this.upOvenPrice *= 1.1;
+            this.ovenSpeed *= 1.5;
+            this.upOvenPrice *= 1.3;
         });
 
         this.$upDriver.addEventListener('click', () => {
@@ -187,8 +187,8 @@ export class Game {
 
             this.cashCount -= this.upDriverPrice;
             this.upDriverCount += 1;
-            this.driverSpeed *= 1.05;
-            this.upDriverPrice *= 1.1;
+            this.driverSpeed *= 1.25;
+            this.upDriverPrice *= 1.2;
         });
     }
 
@@ -217,7 +217,7 @@ export class Game {
         this.pizzaCount -= count;
         this.deliveryCount += count;
         this.cashCount += this.pizzaPrice * count;
-        this.pizzaPrice *= 1.001 * count;
+        this.pizzaPrice *= (1 + (0.001 * count));
     }
 
     update(tick: number) {
@@ -232,19 +232,19 @@ export class Game {
 
         if (this.tick >= this.bakeDeltaTimer) {
             this.bake(this.ovenCount);
-            this.bakeDeltaTimer = this.tick + (1000 - this.ovenSpeed);
+            this.bakeDeltaTimer = this.tick + (2000 - this.ovenSpeed);
         }
 
         if (this.tick >= this.deliverDeltaTimer) {
             this.deliver(this.driverCount);
-            this.deliverDeltaTimer = this.tick + (1000 - this.driverSpeed);
+            this.deliverDeltaTimer = this.tick + (5000 - this.driverSpeed);
         }
     }
 
     draw() {
         this.debug('draw');
 
-        this.$cashCount.innerHTML = `${this.cashCount}`;
+        this.$cashCount.innerHTML = `${this.cashCount.toFixed(2)}`;
         this.$pizzaCount.innerHTML = `${this.pizzaCount}`;
         this.$rawPizzaCount.innerHTML = `${this.rawPizzaCount}`;
         this.$rawPizzaCount.innerHTML = `${this.rawPizzaCount}`;
