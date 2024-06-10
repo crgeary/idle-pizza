@@ -217,7 +217,7 @@ export class Game {
         this.pizzaCount -= count;
         this.deliveryCount += count;
         this.cashCount += this.pizzaPrice * count;
-        this.pizzaPrice *= 1.001;
+        this.pizzaPrice *= 1.001 * count;
     }
 
     update(tick: number) {
@@ -239,11 +239,6 @@ export class Game {
             this.deliver(this.driverCount);
             this.deliverDeltaTimer = this.tick + (1000 - this.driverSpeed);
         }
-
-        console.log(
-            this.rawPizzaCount,
-
-        )
     }
 
     draw() {
