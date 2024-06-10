@@ -21,7 +21,6 @@ export class Game {
     protected employeePrice = 7;
     protected ovenPrice = 25;
     protected driverPrice = 6;
-    protected deliveryExperienceThreshold = 20;
 
     protected upEmployeePrice = 2;
     protected upOvenPrice = 3;
@@ -218,10 +217,7 @@ export class Game {
         this.pizzaCount -= count;
         this.deliveryCount += count;
         this.cashCount += this.pizzaPrice * count;
-
-        if (this.deliveryCount > 0 && 0 === (this.deliveryCount % this.deliveryExperienceThreshold)) {
-            this.pizzaPrice *= 1.0025;
-        }
+        this.pizzaPrice *= 1.001;
     }
 
     update(tick: number) {
