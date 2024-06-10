@@ -9,7 +9,7 @@ export class Game {
     protected tick = 0;
     protected isDebug = false;
 
-    protected cashCount = 100;
+    protected cashCount = 0;
     protected rawPizzaCount = 0;
     protected pizzaCount = 0;
     protected deliveryCount = 0;
@@ -17,10 +17,10 @@ export class Game {
     protected ovenCount = 0;
     protected driverCount = 0;
 
-    protected pizzaPrice = 5;
-    protected employeePrice = 10;
+    protected pizzaPrice = 3;
+    protected employeePrice = 7;
     protected ovenPrice = 25;
-    protected driverPrice = 7;
+    protected driverPrice = 6;
     protected deliveryExperienceThreshold = 20;
 
     protected $cashCount!: HTMLSpanElement;
@@ -89,7 +89,7 @@ export class Game {
             if (this.cashCount >= this.employeePrice) {
                 this.employeeCount += 1
                 this.cashCount -= this.employeePrice;
-                this.employeePrice *= 1.1;
+                this.employeePrice *= 1.125;
             }
         });
 
@@ -97,7 +97,7 @@ export class Game {
            if (this.cashCount >= this.ovenPrice) {
                 this.ovenCount += 1
                 this.cashCount -= this.ovenPrice;
-                this.ovenPrice *= 1.1;
+                this.ovenPrice *= 1.085;
             }
         });
 
@@ -134,7 +134,7 @@ export class Game {
 
         this.pizzaCount -= count;
         this.deliveryCount += count;
-        this.cashCount += this.pizzaPrice;
+        this.cashCount += this.pizzaPrice * count;
 
         if (this.deliveryCount > 0 && 0 === (this.deliveryCount % this.deliveryExperienceThreshold)) {
             this.pizzaPrice *= 1.0025;
