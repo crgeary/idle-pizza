@@ -42,6 +42,7 @@ export class Game {
     protected $ovenCount!: HTMLSpanElement;
     protected $driverCount!: HTMLSpanElement;
     protected $toDeliverCount!: HTMLSpanElement;
+    protected $salesCount!: HTMLSpanElement;
     
     protected $pizzaPrice!: HTMLSpanElement;
     protected $employeePrice!: HTMLSpanElement;
@@ -82,6 +83,7 @@ export class Game {
         this.$ovenCount = u.$('#oven-count')!;
         this.$driverCount = u.$('#driver-count')!;
         this.$toDeliverCount = u.$('#todeliver-count')!;
+        this.$salesCount = u.$('#sales-count')!;
 
         this.$pizzaPrice = u.$('#pizza-price')!;
         this.$employeePrice = u.$('#employee-price')!;
@@ -256,6 +258,7 @@ export class Game {
         this.$rawPizzaCount.innerHTML = `${this.rawPizzaCount}`;
         this.$rawPizzaCount.innerHTML = `${this.rawPizzaCount}`;
         this.$toDeliverCount.innerHTML = `${this.pizzaCount}`;
+        this.$salesCount.innerHTML = `${this.deliveryCount}`;
 
         this.$pizzaPrice.innerHTML = `${this.pizzaPrice.toFixed(2)}`;
         this.$employeePrice.innerHTML = `${this.employeePrice.toFixed(2)}`;
