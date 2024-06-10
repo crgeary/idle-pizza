@@ -36,7 +36,23 @@
       <button id="bake" class="flex-1 p-2">Bake (<span id="rawpizza-count">0</span>)</button>
       <button id="deliver" class="flex-1 p-2">Deliver (<span id="todeliver-count">0</span>)</button>
     </div>
-    
+    <section id="upgrades" class="mt-4">
+      <div class="flex justify-between">
+        <p>Better employees (<span id="up-employee-count">0</span>/100)</p>
+        <p>&pound;<span id="up-employee-price">0</span></p>
+        <button class="bg-sky-500 p-2" id="up-employee">Buy</button>
+      </div>
+      <div class="flex justify-between">
+        <p>Temperature overclock (<span id="up-oven-count">0</span>/100)</p>
+        <p>&pound;<span id="up-oven-price">0</span></p>
+        <button class="bg-sky-500 p-2" id="up-oven">Buy</button>
+      </div>
+      <div class="flex justify-between">
+        <p>Faster drivers (<span id="up-driver-count">0</span>/100)</p>
+        <p>&pound;<span id="up-driver-price">0</span></p>
+        <button class="bg-sky-500 p-2" id="up-driver">Buy</button>
+      </div>
+    </section>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

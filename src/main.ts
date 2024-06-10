@@ -23,6 +23,18 @@ export class Game {
     protected driverPrice = 6;
     protected deliveryExperienceThreshold = 20;
 
+    protected upEmployeePrice = 2;
+    protected upOvenPrice = 3;
+    protected upDriverPrice = 4;
+
+    protected upEmployeeCount = 0;
+    protected upOvenCount = 0;
+    protected upDriverCount = 0;
+
+    protected employeeSpeed = 1;
+    protected ovenSpeed = 1;
+    protected driverSpeed = 1;
+
     protected $cashCount!: HTMLSpanElement;
     protected $rawPizzaCount!: HTMLSpanElement;
     protected $pizzaCount!: HTMLSpanElement;
@@ -35,10 +47,21 @@ export class Game {
     protected $employeePrice!: HTMLSpanElement;
     protected $ovenPrice!: HTMLSpanElement;
     protected $driverPrice!: HTMLSpanElement;
+    protected $upEmployeePrice!: HTMLSpanElement;
+    protected $upOvenPrice!: HTMLSpanElement;
+    protected $upDriverPrice!: HTMLSpanElement;
 
     protected $prepare!: HTMLButtonElement;
     protected $bake!: HTMLButtonElement;
     protected $deliver!: HTMLButtonElement;
+
+    protected $upEmployee!: HTMLButtonElement;
+    protected $upOven!: HTMLButtonElement;
+    protected $upDriver!: HTMLButtonElement;
+
+    protected $upEmployeeCount!: HTMLSpanElement;
+    protected $upOvenCount!: HTMLSpanElement;
+    protected $upDriverCount!: HTMLSpanElement;
 
     protected $hireEmployee!: HTMLButtonElement;
     protected $buyOven!: HTMLButtonElement;
@@ -65,9 +88,21 @@ export class Game {
         this.$ovenPrice = u.$('#oven-price')!;
         this.$driverPrice = u.$('#driver-price')!;
 
+        this.$upEmployeeCount = u.$('#up-employee-count')!;
+        this.$upOvenCount = u.$('#up-oven-count')!;
+        this.$upDriverCount = u.$('#up-driver-count')!;
+
         this.$prepare = u.$('#prepare')!;
         this.$bake = u.$('#bake')!;
         this.$deliver = u.$('#deliver')!;
+
+        this.$upEmployee = u.$('#up-employee')!;
+        this.$upOven = u.$('#up-oven')!;
+        this.$upDriver = u.$('#up-driver')!;
+
+        this.$upEmployeePrice = u.$('#up-employee-price')!;
+        this.$upOvenPrice = u.$('#up-oven-price')!;
+        this.$upDriverPrice = u.$('#up-driver-price')!;
 
         this.$hireEmployee = u.$('#hire-employee')!;
         this.$buyOven = u.$('#buy-oven')!;
@@ -107,6 +142,52 @@ export class Game {
                 this.cashCount -= this.driverPrice;
                 this.driverPrice *= 1.1;
             }
+        });
+
+        this.$upEmployee.addEventListener('click', () => {
+            if (this.upEmployeeCount >= 100) {
+                return;
+            }
+
+            if (this.cashCount < this.upEmployeePrice) {
+                return;
+            }
+
+            this.cashCount -= this.upEmployeePrice;
+            this.upEmployeeCount += 1;
+            this.employeeSpeed *= 1.05;
+            this.upEmployeePrice *= 1.1;
+        });
+
+        this.$upOven.addEventListener('click', () => {
+            if (this.upOvenCount >= 100) {
+                return;
+            }
+
+            if (this.cashCount < this.upOvenPrice) {
+                return;
+            }
+
+            this.cashCount -= this.upOvenPrice;
+            this.upOvenCount += 1;
+            this.ovenSpeed *= 1.05;
+            this.upOvenPrice *= 1.1;
+        });
+
+        this.$upDriver.addEventListener('click', () => {
+            if (this.upDriverCount >= 100) {
+                return;
+            }
+
+            if (this.cashCount < this.upDriverPrice) {
+                return;
+            }
+
+
+            this.cashCount -= this.upDriverPrice;
+            this.upDriverCount += 1;
+            this.driverSpeed *= 1.05;
+            this.upDriverPrice *= 1.1;
         });
     }
 
@@ -148,17 +229,17 @@ export class Game {
 
         if (this.tick >= this.prepareDeltaTimer) {
             this.prepare(this.employeeCount);
-            this.prepareDeltaTimer = this.tick + 1000;
+            this.prepareDeltaTimer = this.tick + (1000 - this.employeeSpeed);
         }
 
         if (this.tick >= this.bakeDeltaTimer) {
             this.bake(this.ovenCount);
-            this.bakeDeltaTimer = this.tick + 1000;
+            this.bakeDeltaTimer = this.tick + (1000 - this.ovenSpeed);
         }
 
         if (this.tick >= this.deliverDeltaTimer) {
             this.deliver(this.driverCount);
-            this.deliverDeltaTimer = this.tick + 1000;
+            this.deliverDeltaTimer = this.tick + (1000 - this.driverSpeed);
         }
 
         console.log(
@@ -180,10 +261,17 @@ export class Game {
         this.$employeePrice.innerHTML = `${this.employeePrice.toFixed(2)}`;
         this.$ovenPrice.innerHTML = `${this.ovenPrice.toFixed(2)}`;
         this.$driverPrice.innerHTML = `${this.driverPrice.toFixed(2)}`;
+        this.$upEmployeePrice.innerHTML = `${this.upEmployeePrice.toFixed(2)}`;
+        this.$upOvenPrice.innerHTML = `${this.upOvenPrice.toFixed(2)}`;
+        this.$upDriverPrice.innerHTML = `${this.upDriverPrice.toFixed(2)}`;
 
         this.$employeeCount.innerHTML = `${this.employeeCount}`;
         this.$ovenCount.innerHTML = `${this.ovenCount}`;
         this.$driverCount.innerHTML = `${this.driverCount}`;
+
+        this.$upEmployeeCount.innerHTML = `${this.upEmployeeCount}`;
+        this.$upOvenCount.innerHTML = `${this.upOvenCount}`;
+        this.$upDriverCount.innerHTML = `${this.upDriverCount}`;
     }
 
     run = (() => {
