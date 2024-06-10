@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza</title>
+  </head>
+  <body class="p-4">
+    <header class="mb-4">
+      <div class="w-72 mb-4">
+        <img src="/logo.svg" alt />
+      </div>
+      <div class="border-b">Cash: 📈<span id="cash-count">0</span></div>
+      <div class="border-b">Pizza(s): 🍕<span id="pizza-count">0</span></div>
+      <div class="border-b">Price: 💰<span id="pizza-price">0</span></div>
+    </header>
+    <section id="equipment" class="flex justify-between mt-4">
+      <div>
+        <div id="employee-count">0</div>
+        <div>Employees</div>
+        <button id="hire-employee" class="p-2 bg-sky-300">Hire &pound;<span id="employee-price">0</span></button>
+      </div>
+      <div>
+        <div id="oven-count">0</div>
+        <div>Ovens</div>
+        <button id="buy-oven" class="p-2 bg-sky-300">Buy &pound;<span id="oven-price">0</span></button>
+      </div>
+      <div>
+        <div id="driver-count">0</div>
+        <div>Drivers</div>
+        <button id="hire-driver" class="p-2 bg-sky-300">Hire &pound;<span id="driver-price">0</span></button>
+      </div>
+    </section>
+    <div class="flex mt-4 border border-gray-200 divide-x divide-gray-200">
+      <button id="prepare" class="flex-1 p-2">Prepare</button>
+      <button id="bake" class="flex-1 p-2">Bake (<span id="rawpizza-count">0</span>)</button>
+      <button id="deliver" class="flex-1 p-2">Deliver (<span id="todeliver-count">0</span>)</button>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
